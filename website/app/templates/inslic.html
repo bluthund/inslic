@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<head>
+<style>
+      table.board
+      { table-layout:fixed;
+        height:200px; width:300px;
+        vertical-align:middle;
+        text-align:center;
+      }
+      td
+      { padding: 0px;}
+    </style>
+    <title>inSlic</title>
+    <meta http-equiv="content-Type" கஙச...tent="text/html; charset=utf-8" />
+
+    <script src="{{url_for('static', filename='jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+    <script type="text/javascript">
+    $(function()
+      { $('button#btn_go').bind('click',function()
+        { $.post('/fn',
+          { code:document.getElementById("code_input").value,
+            text:document.getElementById("text").value
+          },function(data)
+            { var i;
+              var temp = "pqrstz";
+              var k = data.length<6?data.length:6
+              for(i=0;i<k;i++)
+	      { document.getElementById(temp[i]).innerHTML = data[i];
+              }
+              document.getElementById("sugdrop").style.display = "block";
+            });
+        })
+        $('button#1').bind('click',function()
+        { document.getElementById("code_input").value += '1';
+        })
+      })
+
+    function commit(sugdrop)
+    { document.getElementById("text").value += ' ' + sugdrop.options[sugdrop.selectedIndex].innerHTML;
+      document.getElementById("sugdrop").style.display = "none";
+    }
+    </script>
+</head>
+<body>
+<div>
+    <div class="col-md-4">
+
+        <div class="form-group">
+
+            <label for="txt_input">Text:</label>
+   	    <input type="text" class="form-control" id="text" value="இணைப்பதற். தொழுகைக்">
+            <select id="sugdrop" name="selsug" style="display:none" onchange="commit(this)">
+             <option id="p" val="0"></option>
+             <option id="q" val="1"></option>
+             <option id="r" val="2"></option>
+             <option id="s" val="3"></option>
+             <option id="t" val="4"></option>
+             <option id="z" val="5"></option>
+            </select>
+            <label for="txt_input">Code:</label>
+            <input type="text" class="form-control" id="code_input" placeholder="Generated codes" value="0a0a">
+<body onkeydown="tog = 1" onkeyup="tog = 0">
+    <br><br>
+		<div id="keyboard">
+		<table border="1" class="board" id="board" cellspacing="10">
+			<tr>
+        <td id="0" onmousemove="sel(this)">கங</td>
+				<td id="1" onmousemove="sel(this)">சஞ</td>
+				<td id="2" onmousemove="sel(this)">டண</td>
+				<td id="3" onmousemove="sel(this)">தந</td>
+			</tr>
+			<tr>
+				<td id="4" onmousemove="sel(this)">பம</td>
+				<td id="10" colspan="2" onmousemove="sel(this)" align="center">அஇஉ...</td>
+				<td id="5" onmousemove="sel(this)">யர</td>
+      </tr>
+			<tr>
+				<td id="6" onmousemove="sel(this)">லவழ</td>
+				<td id="7" onmousemove="sel(this)">ளறன</td>
+				<td id="8" onmousemove="sel(this)">ஜஶஷ</td>
+				<td id="9" onmousemove="sel(this)">ஸஹ</td>
+			</tr>
+		</table>
+		</div>
+
+<br>
+<button type="button" class="btn btn-primary" id="btn_go" style="width:30%">COMMIT</button>
+
+		<script type="text/javascript">
+			var tog = 0; // 1 = mousedown, record
+			var flag = 0; // 0 = edit, 1 = block
+			var str = " "; // code string
+      var lc = ""; // last char of str
+
+			function sel(x)
+			{ if(tog == 1)
+				{ if(x.id != "10" && x.id != lc)
+          { lc = str.substr(-1);
+            // keypress renegotiation
+            var z = isNaN(parseInt(lc)) ^ isNaN(parseInt(x.id));
+            // deselect previous key, select current key
+            if(!z || !lc)
+             document.getElementById(lc).style.backgroundColor="#ffffff";
+            if(!z)
+            { x.style.backgroundColor="#bde9ba";
+              str = str.slice(0,-1);
+            }
+            str += x.id;
+					  flag = 0;
+					}
+					else if(x.id == "10" && flag == 0 && x.innerHTML == "அஇஉ...")
+					{ if(lc)
+             document.getElementById(lc).style.backgroundColor="#ffffff";
+            document.getElementById("0").id = "a";
+						document.getElementById("a").innerHTML = "அஆ";
+						document.getElementById("1").id = "i";
+						document.getElementById("i").innerHTML = "இஈ";
+						document.getElementById("2").id = "u";
+						document.getElementById("u").innerHTML = "உஊ";
+						document.getElementById("3").id = "e";
+						document.getElementById("e").innerHTML = "எஏ";
+						document.getElementById("4").id = "y";
+						document.getElementById("y").innerHTML = "ஐ";
+						document.getElementById("5").id = "o";
+						document.getElementById("o").innerHTML = "ஒஓ";
+						document.getElementById("6").id = "w";
+						document.getElementById("w").innerHTML = "ஔ";
+						document.getElementById("7").id = "k";
+						document.getElementById("k").innerHTML = "ஃ";
+						document.getElementById("8").id = "x";
+						document.getElementById("x").innerHTML = "்";
+						document.getElementById("9").id = " ";
+						document.getElementById(" ").innerHTML = "✔";
+						document.getElementById("10").innerHTML = "கஙச...";
+						flag = 1;
+					}
+					else if(x.id == "10" && flag == 0 && x.innerHTML == "கஙச...")
+					{ if(lc)
+             document.getElementById(lc).style.backgroundColor="#ffffff";
+            document.getElementById("a").id = "0";
+						document.getElementById("0").innerHTML = "கங";
+						document.getElementById("i").id = "1";
+						document.getElementById("1").innerHTML = "சஞ";
+						document.getElementById("u").id = "2";
+						document.getElementById("2").innerHTML = "டண";
+						document.getElementById("e").id = "3";
+						document.getElementById("3").innerHTML = "தந";
+						document.getElementById("y").id = "4";
+						document.getElementById("4").innerHTML = "பம";
+						document.getElementById("o").id = "5";
+						document.getElementById("5").innerHTML = "யர";
+						document.getElementById("w").id = "6";
+						document.getElementById("6").innerHTML = "லவழ";
+						document.getElementById("k").id = "7";
+						document.getElementById("7").innerHTML = "ளறன";
+						document.getElementById("x").id = "8";
+						document.getElementById("8").innerHTML = "ஜஶஷ";
+						document.getElementById(" ").id = "9";
+						document.getElementById("9").innerHTML = "ஸஹ";
+						document.getElementById("10").innerHTML = "அஇஉ...";
+						flag = 1;
+					}
+				}
+				document.getElementById("code_input").value = str;
+			}
+		</script>
+  </body>
+</html>
