@@ -1,4 +1,4 @@
-# InScic
+# InSlic
 A novel gesture-driven text input method for Indic scripts on a touchscreen interface, using the techniques of <i>chording, T9-style layouts</i> and an analysis of the various design principles in action.
 
 Following are some excerpts from my Bachelor's thesis paper.
